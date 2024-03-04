@@ -25,3 +25,15 @@ todoRoutes.route('/').get((req, res)=>{
         }
     })
 })
+
+todoRoutes.route('/:id').get((req, res)=>{
+    const id = req.params.id;
+    Todo.findById(id, (err, todo)=>{
+        if(!todo){
+            console.log("NOT Found")
+        }
+        else{
+            res.json(todo)
+        }
+    })
+})
