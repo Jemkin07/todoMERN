@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const todoRoutes = express.Router()
 const app = express()
-const Todo = require('./models/DataModels')
+const Todo = require('./models/DataModels');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -43,4 +43,25 @@ todoRoutes.route('/add').post((req, res)=>{
     todo.save()
     .then(todo=>{console.log("todo added successfully")})
     .catch(err=>console.log(err))
+})
+
+todoRoutes.route('/update/:id').post((req, res)=>{
+    Todo.findById(req.params.id, (err, todo)=>{
+        if(!todo){
+            console.log("data not found")
+        }
+        else{
+            Todo.todo_title = req.body.todo_title;
+            Todo.todo_description = req.body.todo_description;
+            Todo.todo_priority = req.body.todo_priority;
+            Todo.todo_completed = req.body.todo_completed;
+            todo.save()
+            .then(todo=>{
+                res.json("todo updated")
+            })
+            .catch(err=>{
+               res.json(err);
+            })
+        }
+    })
 })
