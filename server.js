@@ -37,3 +37,10 @@ todoRoutes.route('/:id').get((req, res)=>{
         }
     })
 })
+
+todoRoutes.route('/add').post((req, res)=>{
+    const todo = new Todo(req.body);
+    todo.save()
+    .then(todo=>{console.log("todo added successfully")})
+    .catch(err=>console.log(err))
+})
