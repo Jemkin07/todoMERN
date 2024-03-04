@@ -9,7 +9,7 @@ const Todo = require('./models/DataModels');
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect("")
+mongoose.connect("mongodb+srv://gggonext05:<password>@cluster0.hbmhlp6.mongodb.net/")
 .then(console.log("connected to Database"))
 .catch(err=>{
     console.log(err)
